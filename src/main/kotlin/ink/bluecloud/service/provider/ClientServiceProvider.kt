@@ -1,12 +1,10 @@
 package ink.bluecloud.ink.bluecloud.service.provider
 
-import ink.bluecloud.client.HttpClient
-import ink.bluecloud.ink.bluecloud.model.networkapi.NetWorkApiProvider
 import kotlin.reflect.KClass
 import kotlin.reflect.full.hasAnnotation
 
 @Suppress("UNCHECKED_CAST")
-abstract class ClientServiceProvider(httpClient: HttpClient, netWorkApiProvider: NetWorkApiProvider) : ServiceProvider(httpClient, netWorkApiProvider){
+abstract class ClientServiceProvider : ServiceProvider(){
     fun <T: ClientService> releaseService(service: KClass<T>) {
         serviceMap.remove(service)
     }
@@ -27,7 +25,6 @@ abstract class ClientServiceProvider(httpClient: HttpClient, netWorkApiProvider:
             it.trySetAccessible()
             it[instance] = args[it.name]
         }
-
 /*
         MethodHandles.privateLookupIn(service, MethodHandles.lookup()).run {
             args.forEach { (k, v) ->

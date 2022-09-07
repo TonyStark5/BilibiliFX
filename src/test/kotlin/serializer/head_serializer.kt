@@ -1,15 +1,9 @@
-import kotlinx.serialization.encodeToByteArray
-import kotlinx.serialization.protobuf.ProtoBuf
 import okhttp3.Headers
-import okhttp3.Headers.Companion.toHeaders
-import java.nio.file.Files
-import java.nio.file.Paths
-import java.nio.file.StandardOpenOption
-import ink.bluecloud.ink.bluecloud.model.networkapi.data.HttpHeaders as HttpHeaders1
 
 var UA_PC = "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:93.0) Gecko/20100101 Firefox/93.0"
 
 @Suppress("UncheckedCast")
+/*
 fun main() {
     val headers = HttpHeaders()
 
@@ -17,14 +11,16 @@ fun main() {
         HttpHeaders::class.java.methods.forEach {
             if (it.returnType != HashMap::class.java) return@forEach
 
-            /*
+            */
+/*
                         it.name.run {
                             substring(3 ..indices.last).run {
                                 append("val ${substring(0,1).lowercase()+substring(1.. indices.last)}: Headers,")
                                 append('\n')
                             }
                         }
-            */
+            *//*
+
             runCatching {
                 if (it.parameters.isEmpty()) {
                     it.invoke(headers) as HashMap<String, String>
@@ -65,6 +61,7 @@ fun main() {
         }
     }
 }
+*/
 
 private fun HashMap<String,String>.toHeaders():Headers {
     val builder = Headers.Builder()

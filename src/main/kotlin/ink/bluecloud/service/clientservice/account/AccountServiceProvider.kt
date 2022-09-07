@@ -1,19 +1,18 @@
-package ink.bluecloud.ink.bluecloud.service.account
+package ink.bluecloud.ink.bluecloud.service.clientservice.account
 
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.QRCodeWriter
-import ink.bluecloud.client.HttpClient
-import ink.bluecloud.ink.bluecloud.model.networkapi.NetWorkApiProvider
 import ink.bluecloud.ink.bluecloud.service.provider.ClientService
 import ink.bluecloud.ink.bluecloud.service.provider.ClientServiceProvider
 import java.io.ByteArrayOutputStream
 import kotlin.reflect.KClass
 import kotlin.reflect.full.superclasses
 
-class AccountServiceProvider(httpClient: HttpClient, netWorkApiProvider: NetWorkApiProvider) : ClientServiceProvider(httpClient, netWorkApiProvider) {
+class AccountServiceProvider: ClientServiceProvider() {
 
     private val accountData = AccountData("","", charArrayOf('1'))
+//    override val injectArgs = hashMapOf("accountData" to accountData)
 
     override fun <T : ClientService> isService(service: KClass<T>) = service.superclasses.contains(AccountService::class)
 
