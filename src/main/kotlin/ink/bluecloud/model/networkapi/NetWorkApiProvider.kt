@@ -10,6 +10,9 @@ abstract class NetWorkApiProvider {
     protected val apiFilePath = Paths.get("config\\HttpAPI.proto")
     protected val headersFilePath = Paths.get("config\\APIHeaders.proto")
 
-    abstract fun getHeaders(block: HttpHeaders.() -> Headers): Headers
-    abstract fun getAPI(block: HttpApi.() -> HttpUrl): HttpUrl
+    abstract val headers: HttpHeaders
+    abstract val api: HttpApi
+
+//    abstract fun getHeaders(): HttpHeaders
+//    abstract fun getAPI(): HttpApi
 }

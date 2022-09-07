@@ -21,7 +21,7 @@ abstract class HttpClient: Client() {
         headers: Headers,
         url: HttpUrl,
         params: Map<String,String>,
-        onFailure: (Call.(IOException) -> Unit)?,
+        onFailure: (Call.(IOException) -> Unit)? = null,
         onResponse: Response.(Call) -> Unit
     )
 

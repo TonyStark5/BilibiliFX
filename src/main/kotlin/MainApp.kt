@@ -1,5 +1,7 @@
 package ink.bluecloud
 
+import ink.bluecloud.cloudtools.cloudnotice.CloudNotice
+import ink.bluecloud.cloudtools.cloudnotice.Property.NoticeType
 import ink.bluecloud.cloudtools.stageinitializer.initCustomizeStageAndRoot
 import ink.bluecloud.css.themes
 import ink.bluecloud.ui.loginview.LoginView
@@ -45,3 +47,5 @@ class MainApp: App(
         }
     }
 }
+
+inline fun Controller.cloudnotice(type: NoticeType, message: String) = CloudNotice(type, message, primaryStage).show()

@@ -1,5 +1,9 @@
 package ink.bluecloud.ui.loginview
 
+import com.alibaba.fastjson2.JSONWriter
+import ink.bluecloud.cloudnotice
+import ink.bluecloud.cloudtools.cloudnotice.CloudNotice
+import ink.bluecloud.cloudtools.cloudnotice.Property.NoticeType
 import ink.bluecloud.ink.bluecloud.service.account.AccountServiceProvider
 import ink.bluecloud.ink.bluecloud.service.account.login.LoginService
 import ink.bluecloud.ink.bluecloud.service.provider.ClientServiceDispatcher
@@ -18,6 +22,11 @@ class LoginViewController: Controller() {
         dispatcher[AccountServiceProvider::class].provideService(LoginService::class) {
             getCode {
                 qrCodeBox.image = Image(this)
+
+                whenSuccess {
+                    cloudnotice(NoticeType.Right, "登录成功！")
+                    println(toJSONString(JSONWriter.Feature.PrettyFormat, JSONWriter.Feature.WriteMapNullValue))
+                }
             }
         }
     }
