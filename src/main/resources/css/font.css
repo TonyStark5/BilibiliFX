@@ -1,0 +1,8 @@
+@font-face {
+    font-family: "HarmonyOS Sans SC";
+    src:url("font.ttf");
+}
+
+.root{
+    -fx-font-family: "HarmonyOS Sans SC";
+}
