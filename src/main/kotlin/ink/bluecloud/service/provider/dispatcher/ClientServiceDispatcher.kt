@@ -1,10 +1,16 @@
 package ink.bluecloud.ink.bluecloud.service.provider.dispatcher
 
-import ink.bluecloud.ink.bluecloud.service.provider.ClientServiceProvider
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceProvider
+import ink.bluecloud.ink.bluecloud.service.provider.provider.ClientServiceProvider
+import ink.bluecloud.ink.bluecloud.service.provider.provider.ServiceProvider
 import tornadofx.*
 import kotlin.reflect.KClass
 
+/**
+ * 服务管理中最终对外暴露的类，该类控制整个程序的服务控制器
+ *
+ * 外部调用者通过get方法获取对应的服务管理器，然后从服务管理器中获取对应服务
+ * 本类的工作是管理全局资源，全局资源通过本类向其他服务提供和管理
+ */
 class ClientServiceDispatcher:ServiceDispatcher() {
     @Suppress("UNCHECKED_CAST")
     operator fun <T: ClientServiceProvider> get(provider: KClass<T>): T {

@@ -1,8 +1,16 @@
-package ink.bluecloud.ink.bluecloud.service.provider
+package ink.bluecloud.ink.bluecloud.service.provider.provider
 
+import ink.bluecloud.ink.bluecloud.service.provider.ClientService
+import ink.bluecloud.ink.bluecloud.service.provider.ExcludeInjectList
+import ink.bluecloud.ink.bluecloud.service.provider.ServiceAutoRelease
 import kotlin.reflect.KClass
+import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.hasAnnotation
 
+/**
+* 服务控制器的父类，每个服务控制器都会从本类继承
+ * 本类提供了参数注入的默认方法，供子类使用或重写
+* */
 @Suppress("UNCHECKED_CAST")
 abstract class ClientServiceProvider : ServiceProvider(){
     fun <T: ClientService> releaseService(service: KClass<T>) {
@@ -13,18 +21,30 @@ abstract class ClientServiceProvider : ServiceProvider(){
     fun <T: ClientService> provideService(service: KClass<T>, block: T.() -> Unit) {
         if (!isService(service)) throw IllegalArgumentException("错误的服务：该服务提供器无法提供该服务！")
         (serviceMap[service]as? T ?: run {
-            instanceService(service.java, injectArgs).apply {
+            instanceService(service, injectArgs).apply {
                 if (!service.hasAnnotation<ServiceAutoRelease>()) serviceMap[service] = this@apply
             }
         }).block()
     }
 
-    protected fun <T : ClientService> instanceService(service: Class<T>, args: Map<String,Any>): T {
-        val instance = service.getConstructor().newInstance()
+    protected fun <T : ClientService> instanceService(service: KClass<T>, args: Map<String,Any>): T {
+        val instance = service.java.getConstructor().newInstance()
+
+        service.findAnnotation<ExcludeInjectList>()?.run {
+            ClientService::class.java.declaredFields.forEach {
+                if (!clazz.contains(it.type.kotlin)) {
+                    it.trySetAccessible()
+                    it[instance] = args[it.name]
+                }
+            }
+            return instance ?: throw NullPointerException("指定的服务不存在：${service}")
+        }
+
         ClientService::class.java.declaredFields.forEach {
             it.trySetAccessible()
             it[instance] = args[it.name]
         }
+
 /*
         MethodHandles.privateLookupIn(service, MethodHandles.lookup()).run {
             args.forEach { (k, v) ->
@@ -36,10 +56,3 @@ abstract class ClientServiceProvider : ServiceProvider(){
         return instance ?: throw NullPointerException("指定的服务不存在：${service}")
     }
 }
-
-/**
-*
-* 在服务中提供此注解，在View使用该服务的时候将不会将其缓存，在调用结束后GC
-*/
-@Target(AnnotationTarget.CLASS)
-annotation class ServiceAutoRelease

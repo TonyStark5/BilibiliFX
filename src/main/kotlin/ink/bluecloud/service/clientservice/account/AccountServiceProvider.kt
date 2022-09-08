@@ -4,16 +4,18 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.QRCodeWriter
 import ink.bluecloud.ink.bluecloud.service.provider.ClientService
-import ink.bluecloud.ink.bluecloud.service.provider.ClientServiceProvider
+import ink.bluecloud.ink.bluecloud.service.provider.provider.ClientServiceProvider
 import java.io.ByteArrayOutputStream
 import kotlin.reflect.KClass
 import kotlin.reflect.full.superclasses
 
+/**
+* 账户相关服务提供器
+ *
+* 通过本提供器，程序获得对用户账户的控制功能
+* */
 class AccountServiceProvider: ClientServiceProvider() {
-
     private val accountData = AccountData("","", charArrayOf('1'))
-//    override val injectArgs = hashMapOf("accountData" to accountData)
-
     override fun <T : ClientService> isService(service: KClass<T>) = service.superclasses.contains(AccountService::class)
 
     init {
@@ -21,6 +23,9 @@ class AccountServiceProvider: ClientServiceProvider() {
     }
 }
 
+/**
+* 账户服务
+*/
 abstract class AccountService: ClientService() {
     lateinit var accountData: AccountData
 
