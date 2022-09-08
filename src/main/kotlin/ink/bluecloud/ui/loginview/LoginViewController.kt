@@ -24,7 +24,6 @@ class LoginViewController: Controller() {
             }
         }
 
-
         dispatcher[AccountServiceProvider::class].provideService(LoginService::class) {
             getCode {
                 qrCodeBox.image = Image(this)

@@ -10,7 +10,4 @@ abstract class NetWorkApiProvider {
 
     abstract val headers: HttpHeaders
     abstract val api: HttpApi
-
-//    abstract fun getHeaders(): HttpHeaders
-//    abstract fun getAPI(): HttpApi
 }

@@ -41,14 +41,18 @@ abstract class ClientServiceProvider : ServiceProvider(){
                         args[field.name]?.run { field[instance] = this }
                     }
                 }
-            }?: service.findAnnotation<OnlyInjectList>()?.run {
+            }
+
+            service.findAnnotation<OnlyInjectList>()?.run {
                 it.java.declaredFields.forEach { field ->
                     if (clazz.contains(field.type.kotlin)) {
                         field.trySetAccessible()
                         args[field.name]?.run { field[instance] = this }
                     }
                 }
-            }?:it.java.declaredFields.forEach { field ->
+            }
+
+            it.java.declaredFields.forEach { field ->
                 field.trySetAccessible()
                 args[field.name]?.run { field[instance] = this }
             }
