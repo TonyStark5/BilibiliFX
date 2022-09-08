@@ -11,6 +11,9 @@ abstract class HttpClient: Client() {
     protected val httpClient = OkHttpClient()
     override val apiProvider = NetWorkApiProviderImpl()
 
+    init {
+        httpClient.dispatcher.executorService
+    }
     abstract fun getFor(
         url: HttpUrl,
         headers: Headers? = defaultHeader,

@@ -6,8 +6,8 @@ import okio.IOException
 
 class HttpClientImpl: HttpClient() {
     override fun getFor(
-        headers: Headers?,
         url: HttpUrl,
+        headers: Headers?,
         onFailure: (Call.(IOException) -> Unit)?,
         onResponse: Response.(Call) -> Unit
     ) {
@@ -20,9 +20,9 @@ class HttpClientImpl: HttpClient() {
     }
 
     override fun postFor(
-        headers: Headers?,
         url: HttpUrl,
-        params: Map<String,String>,
+        params: Map<String, String>,
+        headers: Headers?,
         onFailure: (Call.(IOException) -> Unit)?,
         onResponse: Response.(Call) -> Unit
     ) {

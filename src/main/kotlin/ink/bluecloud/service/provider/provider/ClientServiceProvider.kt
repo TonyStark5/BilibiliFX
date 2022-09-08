@@ -4,6 +4,7 @@ import ink.bluecloud.service.provider.ClientService
 import ink.bluecloud.service.provider.ExcludeInjectList
 import ink.bluecloud.service.provider.ServiceAutoRelease
 import kotlin.reflect.KClass
+import kotlin.reflect.full.allSuperclasses
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.hasAnnotation
 
@@ -27,25 +28,28 @@ abstract class ClientServiceProvider : ServiceProvider(){
         }).block()
     }
 
-    protected fun <T : ClientService> instanceService(service: KClass<T>, args: Map<String,Any>): T {
+    private fun <T : ClientService> instanceService(service: KClass<T>, args: Map<String,Any>): T {
         val instance = service.java.getConstructor().newInstance()
 
-        service.findAnnotation<ExcludeInjectList>()?.run {
-            ClientService::class.java.declaredFields.forEach {
-                if (!clazz.contains(it.type.kotlin)) {
-                    it.trySetAccessible()
-                    it[instance] = args[it.name]
+        service.allSuperclasses.forEach {
+            if (it == Any::class) return@forEach
+
+            service.findAnnotation<ExcludeInjectList>()?.run {
+                it.java.declaredFields.forEach { field ->
+                    if (!clazz.contains(field.type.kotlin)) {
+                        field.trySetAccessible()
+                        args[field.name]?.run { field[instance] = this }
+                    }
+                }
+            }?: run {
+                it.java.declaredFields.forEach { field ->
+                    field.trySetAccessible()
+                    args[field.name]?.run { field[instance] = this }
                 }
             }
-            return instance ?: throw NullPointerException("指定的服务不存在：${service}")
         }
 
-        ClientService::class.java.declaredFields.forEach {
-            it.trySetAccessible()
-            it[instance] = args[it.name]
-        }
-
-/*
+        /*
         MethodHandles.privateLookupIn(service, MethodHandles.lookup()).run {
             args.forEach { (k, v) ->
                 findVarHandle(service, k, v::class.java).set(instance, v)
