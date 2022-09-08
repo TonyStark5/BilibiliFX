@@ -12,16 +12,16 @@ abstract class HttpClient: Client() {
     override val apiProvider = NetWorkApiProviderImpl()
 
     abstract fun getFor(
-        headers: Headers? = defaultHeader,
         url: HttpUrl,
+        headers: Headers? = defaultHeader,
         onFailure: (Call.(IOException) -> Unit)? = null,
         onResponse: Response.(Call) -> Unit
     )
 
     abstract fun postFor(
-        headers: Headers? = defaultHeader,
         url: HttpUrl,
         params: Map<String,String>,
+        headers: Headers? = defaultHeader,
         onFailure: (Call.(IOException) -> Unit)? = null,
         onResponse: Response.(Call) -> Unit
     )
