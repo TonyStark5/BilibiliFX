@@ -2,6 +2,7 @@ package ink.bluecloud.service.provider.provider
 
 import ink.bluecloud.service.provider.ClientService
 import ink.bluecloud.service.provider.ExcludeInjectList
+import ink.bluecloud.service.provider.OnlyInjectList
 import ink.bluecloud.service.provider.ServiceAutoRelease
 import kotlin.reflect.KClass
 import kotlin.reflect.full.allSuperclasses
@@ -33,7 +34,6 @@ abstract class ClientServiceProvider : ServiceProvider(){
 
         service.allSuperclasses.forEach {
             if (it == Any::class) return@forEach
-
             service.findAnnotation<ExcludeInjectList>()?.run {
                 it.java.declaredFields.forEach { field ->
                     if (!clazz.contains(field.type.kotlin)) {
@@ -41,21 +41,18 @@ abstract class ClientServiceProvider : ServiceProvider(){
                         args[field.name]?.run { field[instance] = this }
                     }
                 }
-            }?: run {
+            }?: service.findAnnotation<OnlyInjectList>()?.run {
                 it.java.declaredFields.forEach { field ->
-                    field.trySetAccessible()
-                    args[field.name]?.run { field[instance] = this }
+                    if (clazz.contains(field.type.kotlin)) {
+                        field.trySetAccessible()
+                        args[field.name]?.run { field[instance] = this }
+                    }
                 }
+            }?:it.java.declaredFields.forEach { field ->
+                field.trySetAccessible()
+                args[field.name]?.run { field[instance] = this }
             }
         }
-
-        /*
-        MethodHandles.privateLookupIn(service, MethodHandles.lookup()).run {
-            args.forEach { (k, v) ->
-                findVarHandle(service, k, v::class.java).set(instance, v)
-            }
-        }
-*/
 
         return instance ?: throw NullPointerException("指定的服务不存在：${service}")
     }

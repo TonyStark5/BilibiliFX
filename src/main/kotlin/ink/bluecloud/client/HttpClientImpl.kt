@@ -48,7 +48,7 @@ class HttpClientImpl: HttpClient() {
         onFailure: (Call.(IOException) -> Unit)?,
         onResponse: Response.(Call) -> Unit
     ) {
-        httpClient.newCall(request).enqueue(object : Callback {
+        okHttpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 onFailure?.run {
                     call.onFailure(e)

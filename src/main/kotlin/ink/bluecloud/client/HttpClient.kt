@@ -8,11 +8,11 @@ import okio.IOException
 * Http工具类，提供了post和get两种方法的请求
 * */
 abstract class HttpClient: Client() {
-    protected val httpClient = OkHttpClient()
+    val okHttpClient = OkHttpClient()
     override val apiProvider = NetWorkApiProviderImpl()
 
     init {
-        httpClient.dispatcher.executorService
+        okHttpClient.dispatcher.executorService
     }
     abstract fun getFor(
         url: HttpUrl,

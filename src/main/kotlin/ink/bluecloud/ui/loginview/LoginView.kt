@@ -6,6 +6,7 @@ import javafx.scene.layout.Priority
 import tornadofx.*
 
 class LoginView: LoginViewNodes() {
+
     override val root = borderpane {
         top = TitleBar("登录", primaryStage)
 

@@ -17,3 +17,9 @@ annotation class ServiceAutoRelease
  * */
 @Target(AnnotationTarget.CLASS)
 annotation class ExcludeInjectList(vararg val clazz: KClass<*>)
+
+/**
+ * 并不是所有服务都需要用到所有依赖，通过这个注解，您可以通知注入器仅向您的服务注入部分资源
+ * */
+@Target(AnnotationTarget.CLASS)
+annotation class OnlyInjectList(vararg val clazz: KClass<*>)

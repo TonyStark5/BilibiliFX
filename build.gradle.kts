@@ -29,8 +29,8 @@ dependencies {
     //GUI
     implementation(group = "no.tornado", name = "tornadofx", version = "2.0.0-SNAPSHOT")
     implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-javafx", version = "1.6.4")
-    implementation(files("libTemps\\CloudTools-1.0-SNAPSHOT.jar"))
-    implementation(files("libTemps\\ElementFX-1.0-SNAPSHOT.jar"))
+    implementation(files("libs\\CloudTools-1.0-SNAPSHOT.jar"))
+    implementation(files("libs\\ElementFX-1.0-SNAPSHOT.jar"))
 
     //Utils
     implementation(group = "org.zeroturnaround", name = "zt-exec", version = "1.12")
