@@ -13,8 +13,8 @@ class LoginService: AccountService() {
 
     fun getCode(block: ByteArrayInputStream.() -> Unit) = IO {
         httpClient.getFor(
-            netWorkApiProvider.headers.biliLoginAuthHeaders,
             netWorkApiProvider.api.getLoginQRCode,
+            netWorkApiProvider.headers.biliLoginAuthHeaders,
         ) {
             body.string().parseObject().getJSONObject("data").run {
                 authKey = getString("oauthKey")
@@ -30,9 +30,9 @@ class LoginService: AccountService() {
 
         while (true) {
             httpClient.postFor(
-                netWorkApiProvider.headers.biliLoginAuthVaHeaders,
                 netWorkApiProvider.api.getLoginStatus,
-                mapOf("oauthKey" to authKey, "gourl" to "https://www.bilibili.com/")
+                mapOf("oauthKey" to authKey, "gourl" to "https://www.bilibili.com/"),
+                netWorkApiProvider.headers.biliLoginAuthVaHeaders
             ) {
                 json = body.string().parseObject()
             }
