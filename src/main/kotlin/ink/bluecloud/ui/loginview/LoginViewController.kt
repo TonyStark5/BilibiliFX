@@ -3,9 +3,9 @@ package ink.bluecloud.ui.loginview
 import com.alibaba.fastjson2.JSONWriter
 import ink.bluecloud.cloudnotice
 import ink.bluecloud.cloudtools.cloudnotice.Property.NoticeType
-import ink.bluecloud.ink.bluecloud.service.clientservice.account.AccountServiceProvider
-import ink.bluecloud.ink.bluecloud.service.clientservice.account.login.LoginService
-import ink.bluecloud.ink.bluecloud.service.provider.dispatcher.ClientServiceDispatcher
+import ink.bluecloud.service.clientservice.account.AccountServiceProvider
+import ink.bluecloud.service.clientservice.account.login.LoginService
+import ink.bluecloud.service.provider.dispatcher.ClientServiceDispatcher
 import javafx.scene.image.Image
 import tornadofx.*
 

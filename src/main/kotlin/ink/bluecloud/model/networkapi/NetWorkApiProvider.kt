@@ -1,9 +1,7 @@
-package ink.bluecloud.ink.bluecloud.model.networkapi
+package ink.bluecloud.model.networkapi
 
-import ink.bluecloud.ink.bluecloud.model.networkapi.data.HttpApi
-import ink.bluecloud.ink.bluecloud.model.networkapi.data.HttpHeaders
-import okhttp3.Headers
-import okhttp3.HttpUrl
+import ink.bluecloud.model.networkapi.data.HttpApi
+import ink.bluecloud.model.networkapi.data.HttpHeaders
 import java.nio.file.Paths
 
 abstract class NetWorkApiProvider {

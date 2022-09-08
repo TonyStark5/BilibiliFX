@@ -6,7 +6,6 @@ import ink.bluecloud.cloudtools.stageinitializer.initCustomizeStageAndRoot
 import ink.bluecloud.css.themes
 import ink.bluecloud.ui.loginview.LoginView
 import ink.bluecloud.ui.loginview.LoginViewController
-import javafx.application.Platform
 import javafx.scene.Scene
 import javafx.scene.image.Image
 import javafx.stage.Stage

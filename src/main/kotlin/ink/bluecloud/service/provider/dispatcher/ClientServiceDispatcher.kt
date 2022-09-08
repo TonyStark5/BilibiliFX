@@ -1,7 +1,7 @@
-package ink.bluecloud.ink.bluecloud.service.provider.dispatcher
+package ink.bluecloud.service.provider.dispatcher
 
-import ink.bluecloud.ink.bluecloud.service.provider.provider.ClientServiceProvider
-import ink.bluecloud.ink.bluecloud.service.provider.provider.ServiceProvider
+import ink.bluecloud.service.provider.provider.ClientServiceProvider
+import ink.bluecloud.service.provider.provider.ServiceProvider
 import tornadofx.*
 import kotlin.reflect.KClass
 

@@ -1,4 +1,4 @@
-package ink.bluecloud.ink.bluecloud.service.net
+package ink.bluecloud.service.net
 
 import ink.bluecloud.client.HttpClient
 import okhttp3.*
@@ -6,26 +6,21 @@ import okio.IOException
 
 class HttpClientImpl: HttpClient() {
     override fun getFor(
-        headers: Headers,
+        headers: Headers?,
         url: HttpUrl,
         onFailure: (Call.(IOException) -> Unit)?,
         onResponse: Response.(Call) -> Unit
     ) {
-        httpClient.newCall(Request(url, headers)).enqueue(object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                onFailure?.run {
-                    call.onFailure(e)
-                }?: call.defaultOnFailure(e)
-            }
+        val request = headers?.run {
+            Request(url, headers)
+        }?: Request(url)
 
-            override fun onResponse(call: Call, response: Response) {
-                response.onResponse(call)
-            }
-        })
+
+        executeRequest(request, onFailure, onResponse)
     }
 
     override fun postFor(
-        headers: Headers,
+        headers: Headers?,
         url: HttpUrl,
         params: Map<String,String>,
         onFailure: (Call.(IOException) -> Unit)?,
@@ -38,22 +33,32 @@ class HttpClientImpl: HttpClient() {
         }.build()
 
         val request = Request.Builder()
-            .headers(headers)
+            .apply {
+                headers?.run { headers(this) }
+            }
             .url(url)
             .post(requestBody)
             .build()
+
+        executeRequest(request, onFailure, onResponse)
+    }
+
+    private fun executeRequest(
+        request: Request,
+        onFailure: (Call.(IOException) -> Unit)?,
+        onResponse: Response.(Call) -> Unit
+    ) {
         httpClient.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 onFailure?.run {
                     call.onFailure(e)
-                }?: call.defaultOnFailure(e)
+                } ?: call.defaultOnFailure(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 response.onResponse(call)
             }
         })
-
     }
 
 }

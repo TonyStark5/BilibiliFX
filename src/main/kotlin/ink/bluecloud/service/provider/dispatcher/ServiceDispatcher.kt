@@ -1,8 +1,8 @@
-package ink.bluecloud.ink.bluecloud.service.provider.dispatcher
+package ink.bluecloud.service.provider.dispatcher
 
-import ink.bluecloud.ink.bluecloud.model.networkapi.NetWorkApiProviderImpl
-import ink.bluecloud.ink.bluecloud.service.net.HttpClientImpl
-import ink.bluecloud.ink.bluecloud.service.provider.provider.ClientServiceProvider
+import ink.bluecloud.model.networkapi.NetWorkApiProviderImpl
+import ink.bluecloud.service.net.HttpClientImpl
+import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.javafx.JavaFx

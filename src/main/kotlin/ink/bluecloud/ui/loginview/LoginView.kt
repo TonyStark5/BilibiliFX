@@ -1,8 +1,6 @@
 package ink.bluecloud.ui.loginview
 
 import ink.bluecloud.cloudtools.stageinitializer.TitleBar
-import ink.bluecloud.css.ElementButton
-import ink.bluecloud.css.theme
 import javafx.geometry.Pos
 import javafx.scene.layout.Priority
 import tornadofx.*

@@ -1,18 +1,15 @@
-package ink.bluecloud.ink.bluecloud.service.clientservice.account.login
+package ink.bluecloud.service.clientservice.account.login
 
 import com.alibaba.fastjson2.JSONObject
 import com.alibaba.fastjson2.parseObject
-import ink.bluecloud.client.HttpClient
-import ink.bluecloud.ink.bluecloud.service.clientservice.account.AccountService
-import ink.bluecloud.ink.bluecloud.service.provider.ExcludeInjectList
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceAutoRelease
+import ink.bluecloud.service.clientservice.account.AccountService
+import ink.bluecloud.service.provider.ServiceAutoRelease
 import kotlinx.coroutines.delay
 import java.io.ByteArrayInputStream
 
 @ServiceAutoRelease
 class LoginService: AccountService() {
     private lateinit var authKey:String
-    lateinit var qrCode:String
 
     fun getCode(block: ByteArrayInputStream.() -> Unit) = IO {
         httpClient.getFor(

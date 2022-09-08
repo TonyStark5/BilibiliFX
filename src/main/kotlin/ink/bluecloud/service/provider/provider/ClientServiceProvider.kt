@@ -1,8 +1,8 @@
-package ink.bluecloud.ink.bluecloud.service.provider.provider
+package ink.bluecloud.service.provider.provider
 
-import ink.bluecloud.ink.bluecloud.service.provider.ClientService
-import ink.bluecloud.ink.bluecloud.service.provider.ExcludeInjectList
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceAutoRelease
+import ink.bluecloud.service.provider.ClientService
+import ink.bluecloud.service.provider.ExcludeInjectList
+import ink.bluecloud.service.provider.ServiceAutoRelease
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 import kotlin.reflect.full.hasAnnotation

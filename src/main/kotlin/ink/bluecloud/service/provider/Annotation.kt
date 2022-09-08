@@ -1,10 +1,11 @@
-package ink.bluecloud.ink.bluecloud.service.provider
+package ink.bluecloud.service.provider
 
 import kotlin.reflect.KClass
 
 /**
- * 当View中使用ProviderService时，系统会将对应的服务缓存起来供下次使用，这意味着
+ * 通常情况下，当View中使用ProviderService时，系统会将对应的服务缓存起来供下次使用，这意味着
  * 该服务能将资源保存在自己的成员变量中而不被释放
+ *
  * 在服务中提供此注解，在View使用该服务的时候将不会将其缓存，在调用结束后GC
  * 这意味着您需要更谨慎的保存资源
  */

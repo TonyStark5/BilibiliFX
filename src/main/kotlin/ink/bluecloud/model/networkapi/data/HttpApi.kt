@@ -1,5 +1,5 @@
 @file:UseSerializers(OKHttpURLSerializer::class)
-package ink.bluecloud.ink.bluecloud.model.networkapi.data
+package ink.bluecloud.model.networkapi.data
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable

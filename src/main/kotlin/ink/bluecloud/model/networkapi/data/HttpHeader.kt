@@ -1,5 +1,5 @@
 @file:UseSerializers(OKHttpHeaderSerializer::class)
-package ink.bluecloud.ink.bluecloud.model.networkapi.data
+package ink.bluecloud.model.networkapi.data
 
 import kotlinx.serialization.*
 import kotlinx.serialization.descriptors.PrimitiveKind

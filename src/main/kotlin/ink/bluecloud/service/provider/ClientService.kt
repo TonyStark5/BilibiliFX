@@ -1,7 +1,7 @@
-package ink.bluecloud.ink.bluecloud.service.provider
+package ink.bluecloud.service.provider
 
 import ink.bluecloud.client.HttpClient
-import ink.bluecloud.ink.bluecloud.model.networkapi.NetWorkApiProvider
+import ink.bluecloud.model.networkapi.NetWorkApiProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 

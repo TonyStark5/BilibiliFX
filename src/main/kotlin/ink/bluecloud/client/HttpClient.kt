@@ -1,24 +1,25 @@
 package ink.bluecloud.client
 
-import ink.bluecloud.ink.bluecloud.model.networkapi.NetWorkApiProviderImpl
+import ink.bluecloud.model.networkapi.NetWorkApiProviderImpl
 import okhttp3.*
-import okhttp3.internal.platform.Platform
 import okio.IOException
-import kotlin.concurrent.thread
 
+/**
+* Http工具类，提供了post和get两种方法的请求
+* */
 abstract class HttpClient: Client() {
     protected val httpClient = OkHttpClient()
     override val apiProvider = NetWorkApiProviderImpl()
 
     abstract fun getFor(
-        headers: Headers,
+        headers: Headers? = defaultHeader,
         url: HttpUrl,
         onFailure: (Call.(IOException) -> Unit)? = null,
         onResponse: Response.(Call) -> Unit
     )
 
     abstract fun postFor(
-        headers: Headers,
+        headers: Headers? = defaultHeader,
         url: HttpUrl,
         params: Map<String,String>,
         onFailure: (Call.(IOException) -> Unit)? = null,
