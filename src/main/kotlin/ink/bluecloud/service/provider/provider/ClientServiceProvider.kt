@@ -79,8 +79,7 @@ abstract class ClientServiceProvider : ServiceProvider(){
         instance: T?
     ) {
         if (field.name == "ioScope" ||field.name == "uiScope") {
-            field.trySetAccessible()
-            injectArgs[field.name]?.run { field[instance] = this }
+            doInject(field, injectArgs, instance)
         }
     }
 
