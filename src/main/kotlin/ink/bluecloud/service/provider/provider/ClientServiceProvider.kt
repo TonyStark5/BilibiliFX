@@ -66,6 +66,10 @@ abstract class ClientServiceProvider : ServiceProvider(){
         return instance ?: throw NullPointerException("指定的服务不存在：${service}")
     }
 
+    protected fun KClass<out ClientService>.checkService(service: KClass<out ClientService>):Boolean {
+        return superclasses.contains(service)
+    }
+
     private inline fun <T : ClientService> firstInject(
         field: Field,
         injectArgs: Map<String, Any>,

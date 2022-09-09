@@ -7,7 +7,6 @@ import ink.bluecloud.ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import java.io.ByteArrayOutputStream
 import kotlin.reflect.KClass
-import kotlin.reflect.full.superclasses
 
 /**
 * 账户相关服务提供器
@@ -16,7 +15,7 @@ import kotlin.reflect.full.superclasses
 * */
 class AccountServiceProvider: ClientServiceProvider() {
     private val accountData = AccountData("","", charArrayOf('1'))
-    override fun <T : ClientService> isService(service: KClass<T>) = service.superclasses.contains(AccountService::class)
+    override fun <T : ClientService> isService(service: KClass<T>) = service.checkService(AccountService::class)
 
     init {
         localInjectArgs["accountData"] = accountData
