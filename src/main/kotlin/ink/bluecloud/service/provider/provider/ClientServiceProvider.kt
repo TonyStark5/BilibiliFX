@@ -12,7 +12,7 @@ import kotlin.reflect.full.*
 * 服务控制器的父类，每个服务控制器都会从本类继承
  * 本类提供了参数注入的默认方法，供子类使用或重写
 * */
-@Suppress("UNCHECKED_CAST")
+@Suppress("NOTHING_TO_INLINE","UNCHECKED_CAST")
 abstract class ClientServiceProvider : ServiceProvider(){
     @OptIn(ExperimentalStdlibApi::class)
     fun <T: ClientService> provideService(service: KClass<T>, block: T.() -> Unit) {
