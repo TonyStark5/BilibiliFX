@@ -16,6 +16,7 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 data class HttpApi(
     val getLoginQRCode: HttpUrl = "https://passport.bilibili.com/qrcode/getLoginUrl".toHttpUrl(),
     val getLoginStatus: HttpUrl = "https://passport.bilibili.com/qrcode/getLoginInfo".toHttpUrl(),
+    val getPortalVideos: HttpUrl = "https://api.bilibili.com/x/web-interface/index/top/feed/rcmd".toHttpUrl(),
 )
 
 object OKHttpURLSerializer: KSerializer<HttpUrl> {
