@@ -8,6 +8,6 @@ abstract class Client {
 
     protected val defaultHeader = Headers.Builder()
         .add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36")
-        .add("referer", "www.bilibili.com")
+        .add("referer", "http://www.bilibili.com")
         .build()
 }
