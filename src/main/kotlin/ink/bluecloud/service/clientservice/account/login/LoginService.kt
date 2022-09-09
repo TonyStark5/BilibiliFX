@@ -2,12 +2,15 @@ package ink.bluecloud.service.clientservice.account.login
 
 import com.alibaba.fastjson2.JSONObject
 import com.alibaba.fastjson2.parseObject
+import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
 import ink.bluecloud.service.clientservice.account.AccountService
+import ink.bluecloud.service.provider.InjectByClassified
 import ink.bluecloud.service.provider.ServiceAutoRelease
 import kotlinx.coroutines.delay
 import java.io.ByteArrayInputStream
 
 @ServiceAutoRelease
+@InjectByClassified(ServiceType.NetWork)
 class LoginService: AccountService() {
     private lateinit var authKey:String
 

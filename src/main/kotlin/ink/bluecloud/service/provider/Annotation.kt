@@ -1,5 +1,6 @@
 package ink.bluecloud.service.provider
 
+import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
 import kotlin.reflect.KClass
 
 /**
@@ -16,10 +17,28 @@ annotation class ServiceAutoRelease
  * 并不是所有服务都需要用到所有依赖，通过这个注解，您可以通知注入器停止向您注入您不需要使用的资源
  * */
 @Target(AnnotationTarget.CLASS)
-annotation class ExcludeInjectList(vararg val clazz: KClass<*>)
+annotation class InjectListExcluding(vararg val clazz: KClass<*>)
 
 /**
  * 并不是所有服务都需要用到所有依赖，通过这个注解，您可以通知注入器仅向您的服务注入部分资源
  * */
 @Target(AnnotationTarget.CLASS)
-annotation class OnlyInjectList(vararg val clazz: KClass<*>)
+annotation class InjectListOnly(vararg val clazz: KClass<*>)
+
+/**
+ * 并不是所有服务都需要用到所有依赖，通过这个注解，您可以注入所有依赖项
+ * */
+@Target(AnnotationTarget.CLASS)
+annotation class InjectAllResources
+
+/**
+ * 并不是所有服务都需要用到所有依赖，通过这个注解，您可以按照分类注入您需要的依赖项目
+ * */
+@Target(AnnotationTarget.CLASS)
+annotation class InjectByClassified(vararg val type: ServiceType)
+
+/**
+ * 并不是所有服务都需要用到所有依赖，通过这个注解，您可以按照分类注入您需要的依赖项目
+ * */
+@Target(AnnotationTarget.FIELD, AnnotationTarget.TYPE)
+annotation class InjectResourcesType(val type: ServiceType)

@@ -3,7 +3,7 @@ package ink.bluecloud.service.clientservice.account
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.client.j2se.MatrixToImageWriter
 import com.google.zxing.qrcode.QRCodeWriter
-import ink.bluecloud.service.provider.ClientService
+import ink.bluecloud.ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import java.io.ByteArrayOutputStream
 import kotlin.reflect.KClass
@@ -19,7 +19,7 @@ class AccountServiceProvider: ClientServiceProvider() {
     override fun <T : ClientService> isService(service: KClass<T>) = service.superclasses.contains(AccountService::class)
 
     init {
-        injectArgs["accountData"] = accountData
+        localInjectArgs["accountData"] = accountData
     }
 }
 

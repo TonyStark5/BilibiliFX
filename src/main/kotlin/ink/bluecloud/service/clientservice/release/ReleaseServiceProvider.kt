@@ -1,6 +1,6 @@
 package ink.bluecloud.ink.bluecloud.service.clientservice.release
 
-import ink.bluecloud.service.provider.ClientService
+import ink.bluecloud.ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import kotlin.reflect.KClass
 import kotlin.reflect.full.superclasses

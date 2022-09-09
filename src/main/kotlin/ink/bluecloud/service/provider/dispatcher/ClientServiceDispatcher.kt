@@ -1,5 +1,6 @@
 package ink.bluecloud.service.provider.dispatcher
 
+import ink.bluecloud.service.provider.InjectResourcesType
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import ink.bluecloud.service.provider.provider.ServiceProvider
 import tornadofx.*
@@ -36,5 +37,15 @@ class ClientServiceDispatcher:ServiceDispatcher() {
         }
 
         return instance ?: throw NullPointerException("指定的服务不存在：${simpleName}")
+    }
+
+    init {
+        injectTypes.apply {
+            this@ClientServiceDispatcher.javaClass.superclass.declaredFields.forEach {
+                it.getAnnotation(InjectResourcesType::class.java)?.type?.run {
+                    put(it.name, this)
+                }
+            }
+        }
     }
 }

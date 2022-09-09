@@ -1,13 +1,10 @@
 package ink.bluecloud.service.provider.provider
 
-import ink.bluecloud.service.provider.ClientService
-import ink.bluecloud.service.provider.ExcludeInjectList
-import ink.bluecloud.service.provider.OnlyInjectList
-import ink.bluecloud.service.provider.ServiceAutoRelease
+import ink.bluecloud.ink.bluecloud.service.ClientService
+import ink.bluecloud.service.provider.*
+import java.lang.reflect.Field
 import kotlin.reflect.KClass
-import kotlin.reflect.full.allSuperclasses
-import kotlin.reflect.full.findAnnotation
-import kotlin.reflect.full.hasAnnotation
+import kotlin.reflect.full.*
 
 /**
 * 服务控制器的父类，每个服务控制器都会从本类继承
@@ -15,49 +12,77 @@ import kotlin.reflect.full.hasAnnotation
 * */
 @Suppress("UNCHECKED_CAST")
 abstract class ClientServiceProvider : ServiceProvider(){
-    fun <T: ClientService> releaseService(service: KClass<T>) {
-        serviceMap.remove(service)
-    }
-
     @OptIn(ExperimentalStdlibApi::class)
     fun <T: ClientService> provideService(service: KClass<T>, block: T.() -> Unit) {
         if (!isService(service)) throw IllegalArgumentException("错误的服务：该服务提供器无法提供该服务！")
         (serviceMap[service]as? T ?: run {
-            instanceService(service, injectArgs).apply {
+            instanceService(service, injectArgs,localInjectArgs).apply {
                 if (!service.hasAnnotation<ServiceAutoRelease>()) serviceMap[service] = this@apply
             }
         }).block()
     }
 
-    private fun <T : ClientService> instanceService(service: KClass<T>, args: Map<String,Any>): T {
+    fun <T: ClientService> releaseService(service: KClass<T>) {
+        serviceMap.remove(service)
+    }
+
+    private fun <T : ClientService> instanceService(service: KClass<T>, injectArgs: Map<String,Any>, localInjectArgs: Map<String,Any>): T {
         val instance = service.java.getConstructor().newInstance()
 
         service.allSuperclasses.forEach {
             if (it == Any::class) return@forEach
-            service.findAnnotation<ExcludeInjectList>()?.run {
+            service.findAnnotation<InjectListExcluding>()?.run {
                 it.java.declaredFields.forEach { field ->
-                    if (!clazz.contains(field.type.kotlin)) {
-                        field.trySetAccessible()
-                        args[field.name]?.run { field[instance] = this }
-                    }
+                    firstInject(field, injectArgs, instance)
+                    if (!clazz.contains(field.type.kotlin)) doInject(field, injectArgs, instance)
                 }
             }
 
-            service.findAnnotation<OnlyInjectList>()?.run {
+            service.findAnnotation<InjectListOnly>()?.run {
                 it.java.declaredFields.forEach { field ->
-                    if (clazz.contains(field.type.kotlin)) {
-                        field.trySetAccessible()
-                        args[field.name]?.run { field[instance] = this }
-                    }
+                    firstInject(field, injectArgs, instance)
+                    if (clazz.contains(field.type.kotlin)) doInject(field, injectArgs, instance)
+                }
+            }
+
+            service.findAnnotation<InjectByClassified>()?.run {
+                it.java.declaredFields.forEach { field ->
+                    firstInject(field, injectArgs, instance)
+                    if (injectTypes.contains(field.name) && injectTypes[field.name] in type) doInject(field, injectArgs, instance)
+                }
+            }
+
+            service.findAnnotation<InjectAllResources>()?.run {
+                it.java.declaredFields.forEach { field ->
+                    doInject(field, injectArgs, instance)
                 }
             }
 
             it.java.declaredFields.forEach { field ->
-                field.trySetAccessible()
-                args[field.name]?.run { field[instance] = this }
+                doInject(field, localInjectArgs, instance)
             }
         }
 
         return instance ?: throw NullPointerException("指定的服务不存在：${service}")
+    }
+
+    private inline fun <T : ClientService> firstInject(
+        field: Field,
+        injectArgs: Map<String, Any>,
+        instance: T?
+    ) {
+        if (field.name == "ioScope" ||field.name == "uiScope") {
+            field.trySetAccessible()
+            injectArgs[field.name]?.run { field[instance] = this }
+        }
+    }
+
+    private inline fun <T : ClientService> doInject(
+        field: Field,
+        injectArgs: Map<String, Any>,
+        instance: T?
+    ) {
+        field.trySetAccessible()
+        injectArgs[field.name]?.run { field[instance] = this }
     }
 }

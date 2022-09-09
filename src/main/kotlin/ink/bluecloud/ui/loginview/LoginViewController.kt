@@ -5,9 +5,9 @@ import ink.bluecloud.cloudnotice
 import ink.bluecloud.cloudtools.cloudnotice.Property.NoticeType
 import ink.bluecloud.cloudtools.stageinitializer.TitleBar
 import ink.bluecloud.ink.bluecloud.service.clientservice.release.ReleaseServiceProvider
-import ink.bluecloud.ink.bluecloud.service.clientservice.release.login.ReleaseService
 import ink.bluecloud.service.clientservice.account.AccountServiceProvider
 import ink.bluecloud.service.clientservice.account.login.LoginService
+import ink.bluecloud.service.clientservice.release.releaseOkhttp.ReleaseService
 import ink.bluecloud.service.provider.dispatcher.ClientServiceDispatcher
 import javafx.application.Platform
 import javafx.scene.image.Image

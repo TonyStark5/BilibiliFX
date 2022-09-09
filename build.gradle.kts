@@ -42,6 +42,7 @@ dependencies {
     //Serialization
     implementation(group = "com.alibaba.fastjson2", name = "fastjson2-kotlin", version = "2.0.12")
     implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-protobuf-jvm", version = "1.4.0")
+    implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json-jvm", version = "1.4.0")
 
     //QRCode
     implementation(group = "com.google.zxing", name = "core", version = "3.5.0")
