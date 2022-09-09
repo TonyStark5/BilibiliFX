@@ -2,6 +2,8 @@ package ink.bluecloud.service.provider.provider
 
 import ink.bluecloud.ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.*
+import java.lang.invoke.MethodHandles
+import java.lang.invoke.MethodType
 import java.lang.reflect.Field
 import kotlin.reflect.KClass
 import kotlin.reflect.full.*
@@ -26,8 +28,9 @@ abstract class ClientServiceProvider : ServiceProvider(){
         serviceMap.remove(service)
     }
 
+    private val methodHandles = MethodHandles.lookup()
     private fun <T : ClientService> instanceService(service: KClass<T>, injectArgs: Map<String,Any>, localInjectArgs: Map<String,Any>): T {
-        val instance = service.java.getConstructor().newInstance()
+        val instance = methodHandles.findConstructor(service.java, MethodType.methodType(Void.TYPE)).invoke()as? T
 
         service.allSuperclasses.forEach {
             if (it == Any::class) return@forEach
@@ -86,7 +89,8 @@ abstract class ClientServiceProvider : ServiceProvider(){
         injectArgs: Map<String, Any>,
         instance: T?
     ) {
-        field.trySetAccessible()
-        injectArgs[field.name]?.run { field[instance] = this }
+        methodHandles.unreflectVarHandle(field).run {
+            injectArgs[field.name]?.run { set(instance, this) }
+        }
     }
 }
