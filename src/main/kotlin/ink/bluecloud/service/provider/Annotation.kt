@@ -38,7 +38,7 @@ annotation class InjectAllResources
 annotation class InjectByClassified(vararg val type: ServiceType)
 
 /**
- * 并不是所有服务都需要用到所有依赖，通过这个注解，您可以按照分类注入您需要的依赖项目
+ * 通过这个注解标记该依赖的作用类型
  * */
 @Target(AnnotationTarget.FIELD, AnnotationTarget.TYPE)
 annotation class InjectResourcesType(val type: ServiceType)
