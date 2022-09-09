@@ -67,7 +67,7 @@ abstract class ClientServiceProvider : ServiceProvider(){
     }
 
     protected fun KClass<out ClientService>.checkService(service: KClass<out ClientService>):Boolean {
-        return superclasses.contains(service)
+        return this == service || superclasses.contains(service)
     }
 
     private inline fun <T : ClientService> firstInject(

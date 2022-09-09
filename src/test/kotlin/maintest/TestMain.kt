@@ -2,7 +2,6 @@ package maintest
 
 import ink.bluecloud.ink.bluecloud.service.ClientService
 import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
-import ink.bluecloud.service.clientservice.account.AccountService
 import ink.bluecloud.service.provider.InjectByClassified
 import ink.bluecloud.service.provider.dispatcher.ClientServiceDispatcher
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
@@ -17,7 +16,7 @@ fun main() {
 }
 
 class TestProvider:ClientServiceProvider() {
-    override fun <T : ClientService> isService(service: KClass<T>) = service.checkService(AccountService::class)
+    override fun <T : ClientService> isService(service: KClass<T>) = service.checkService(MainTest::class)
 }
 
 @InjectByClassified(ServiceType.NetWork)
