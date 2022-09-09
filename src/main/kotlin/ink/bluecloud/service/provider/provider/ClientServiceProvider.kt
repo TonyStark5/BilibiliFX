@@ -36,7 +36,6 @@ abstract class ClientServiceProvider : ServiceProvider(){
             if (it == Any::class) return@forEach
             service.findAnnotation<InjectListExcluding>()?.run {
                 it.java.declaredFields.forEach { field ->
-                    firstInject(field, injectArgs, instance)
                     if (!clazz.contains(field.type.kotlin)) doInject(field, injectArgs, instance)
                 }
             }
