@@ -29,6 +29,6 @@ class TestProvider:ClientServiceProvider() {
 class MainTestService: ClientService() {
     fun doSome() = IO {
         println(httpClient)
-        println(netWorkApiProvider.api.getLoginQRCode)
+        println(netWorkResourcesProvider.api.getLoginQRCode)
     }
 }

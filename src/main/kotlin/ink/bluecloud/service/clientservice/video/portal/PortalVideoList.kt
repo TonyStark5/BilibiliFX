@@ -2,20 +2,14 @@ package ink.bluecloud.ink.bluecloud.service.clientservice.portal
 
 import com.alibaba.fastjson2.JSONObject
 import ink.bluecloud.ink.bluecloud.exceptions.PojoException
-import ink.bluecloud.ink.bluecloud.model.pojo.video.portal.PortalVideoJsonRoot
-import ink.bluecloud.service.provider.ServiceAutoRelease
-import okhttp3.HttpUrl.Companion.toHttpUrl
-import ink.bluecloud.ink.bluecloud.service.ClientService
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
 import ink.bluecloud.ink.bluecloud.model.data.Video
 import ink.bluecloud.ink.bluecloud.model.data.VideoType
+import ink.bluecloud.ink.bluecloud.model.pojo.video.portal.PortalVideoJsonRoot
+import ink.bluecloud.ink.bluecloud.service.ClientService
+import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
 import ink.bluecloud.service.provider.InjectByClassified
+import ink.bluecloud.service.provider.ServiceAutoRelease
 import ink.bluecloud.service.provider.dispatcher.ClientServiceDispatcher
-import ink.bluecloud.service.provider.provider.ClientServiceProvider
-import java.lang.Exception
-
-import kotlin.reflect.KClass
-import kotlin.reflect.full.superclasses
 
 
 val dispatcher = ClientServiceDispatcher()
@@ -83,7 +77,7 @@ class PortalVideoList : ClientService() {
      */
     fun getPage(num: Int = 11, handle: (String) -> Unit)=IO{
         httpClient.getFor(
-            netWorkApiProvider.api.getPortalVideos.newBuilder("?ps=${num}")?.build()!!
+            netWorkResourcesProvider.api.getPortalVideos.newBuilder("?ps=${num}")?.build()!!
         ) {
             val result=body.string()
             handle(result)

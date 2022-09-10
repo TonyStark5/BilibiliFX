@@ -1,6 +1,6 @@
 package ink.bluecloud.client
 
-import ink.bluecloud.model.networkapi.NetWorkApiProviderImpl
+import ink.bluecloud.model.networkapi.NetWorkResourcesProviderImpl
 import okhttp3.*
 import okio.IOException
 
@@ -9,7 +9,7 @@ import okio.IOException
 * */
 abstract class HttpClient: Client() {
     val okHttpClient = OkHttpClient()
-    override val apiProvider = NetWorkApiProviderImpl()
+    override val netResourcesProvider = NetWorkResourcesProviderImpl()
 
     init {
         okHttpClient.dispatcher.executorService

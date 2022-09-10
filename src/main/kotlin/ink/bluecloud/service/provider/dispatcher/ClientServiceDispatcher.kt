@@ -3,7 +3,10 @@ package ink.bluecloud.service.provider.dispatcher
 import ink.bluecloud.service.provider.InjectResourcesType
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import ink.bluecloud.service.provider.provider.ServiceProvider
+import mu.KotlinLogging
 import tornadofx.*
+import java.lang.invoke.MethodHandles
+import java.lang.invoke.MethodType
 import kotlin.reflect.KClass
 
 /**
@@ -13,6 +16,7 @@ import kotlin.reflect.KClass
  * 本类的工作是管理全局资源，全局资源通过本类向其他服务提供和管理
  */
 class ClientServiceDispatcher:ServiceDispatcher() {
+    val logger = KotlinLogging.logger {  }
     @Suppress("UNCHECKED_CAST")
     operator fun <T: ClientServiceProvider> get(provider: KClass<T>): T {
         return serviceMap[provider]as? T ?: synchronized(this) {
@@ -22,8 +26,18 @@ class ClientServiceDispatcher:ServiceDispatcher() {
         }
     }
 
+    private val methodHandles = MethodHandles.lookup()
     private fun Class<out ClientServiceProvider>.instanceService(): ClientServiceProvider {
-        val instance = getConstructor().newInstance()
+        val instance = runCatching {
+            methodHandles.findConstructor(this, MethodType.methodType(Void.TYPE)).invoke()as? ClientServiceProvider
+        }.onSuccess {
+            it
+        }.onFailure {
+            logger.error(it) {
+                println("Exception then instance service provicer:${simpleName},error: ${it.message}")
+            }
+        }.getOrNull()
+
         ServiceProvider::class.java.declaredFields.forEach {
             injectArgs[it.name]?.run {
                 it.trySetAccessible()

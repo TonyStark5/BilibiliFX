@@ -34,9 +34,16 @@ abstract class ClientServiceProvider : ServiceProvider(){
 
         service.allSuperclasses.forEach {
             if (it == Any::class) return@forEach
+
             service.findAnnotation<InjectListExcluding>()?.run {
                 it.java.declaredFields.forEach { field ->
                     if (!clazz.contains(field.type.kotlin)) doInject(field, injectArgs, instance)
+                }
+            }
+
+            service.findAnnotation<InjectAllResource>()?.run {
+                it.java.declaredFields.forEach { field ->
+                    doInject(field, injectArgs, instance)
                 }
             }
 
@@ -51,12 +58,6 @@ abstract class ClientServiceProvider : ServiceProvider(){
                 it.java.declaredFields.forEach { field ->
                     firstInject(field, injectArgs, instance)
                     if (injectTypes.contains(field.name) && injectTypes[field.name] in type) doInject(field, injectArgs, instance)
-                }
-            }
-
-            service.findAnnotation<InjectAllResources>()?.run {
-                it.java.declaredFields.forEach { field ->
-                    doInject(field, injectArgs, instance)
                 }
             }
 

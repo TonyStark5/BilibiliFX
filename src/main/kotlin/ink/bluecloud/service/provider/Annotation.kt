@@ -29,7 +29,7 @@ annotation class InjectListOnly(vararg val clazz: KClass<*>)
  * 并不是所有服务都需要用到所有依赖，通过这个注解，您可以注入所有依赖项
  * */
 @Target(AnnotationTarget.CLASS)
-annotation class InjectAllResources
+annotation class InjectAllResource
 
 /**
  * 并不是所有服务都需要用到所有依赖，通过这个注解，您可以按照分类注入您需要的依赖项目

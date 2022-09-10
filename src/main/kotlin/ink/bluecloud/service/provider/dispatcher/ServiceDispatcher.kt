@@ -3,8 +3,8 @@ package ink.bluecloud.service.provider.dispatcher
 import ink.bluecloud.client.HttpClient
 import ink.bluecloud.ink.bluecloud.service.provider.ServiceResources
 import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
-import ink.bluecloud.model.networkapi.NetWorkApiProvider
-import ink.bluecloud.model.networkapi.NetWorkApiProviderImpl
+import ink.bluecloud.model.networkapi.NetWorkResourcesProvider
+import ink.bluecloud.model.networkapi.NetWorkResourcesProviderImpl
 import ink.bluecloud.service.net.HttpClientImpl
 import ink.bluecloud.service.provider.InjectResourcesType
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
@@ -23,7 +23,7 @@ abstract class ServiceDispatcher: Controller(),ServiceResources {
     @InjectResourcesType(ServiceType.NetWork)
     final override val httpClient: HttpClient = HttpClientImpl()
     @InjectResourcesType(ServiceType.NetWork)
-    final override val netWorkApiProvider: NetWorkApiProvider = NetWorkApiProviderImpl()
+    final override val netWorkResourcesProvider: NetWorkResourcesProvider = NetWorkResourcesProviderImpl()
 
     final override val ioScope = CoroutineScope(Dispatchers.IO)
     final override val uiScope = CoroutineScope(Dispatchers.JavaFx)
@@ -35,7 +35,7 @@ abstract class ServiceDispatcher: Controller(),ServiceResources {
     * */
     protected val injectArgs = hashMapOf(
         "httpClient" to httpClient,
-        "netWorkApiProvider" to netWorkApiProvider,
+        "netWorkResourcesProvider" to netWorkResourcesProvider,
         "ioScope" to ioScope,
         "uiScope" to uiScope,
         "injectTypes" to injectTypes,

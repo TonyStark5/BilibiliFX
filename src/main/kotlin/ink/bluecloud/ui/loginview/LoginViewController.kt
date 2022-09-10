@@ -5,7 +5,7 @@ import ink.bluecloud.cloudnotice
 import ink.bluecloud.cloudtools.cloudnotice.Property.NoticeType
 import ink.bluecloud.cloudtools.stageinitializer.TitleBar
 import ink.bluecloud.ink.bluecloud.service.clientservice.release.ReleaseServiceProvider
-import ink.bluecloud.service.clientservice.account.AccountServiceProvider
+import ink.bluecloud.service.clientservice.account.AccountServiceProviderImpl
 import ink.bluecloud.service.clientservice.account.login.LoginService
 import ink.bluecloud.service.clientservice.release.releaseOkhttp.ReleaseService
 import ink.bluecloud.service.provider.dispatcher.ClientServiceDispatcher
@@ -24,7 +24,7 @@ class LoginViewController: Controller() {
             }
         }
 
-        dispatcher[AccountServiceProvider::class].provideService(LoginService::class) {
+        dispatcher[AccountServiceProviderImpl::class].provideService(LoginService::class) {
             getCode {
                 qrCodeBox.image = Image(this)
 

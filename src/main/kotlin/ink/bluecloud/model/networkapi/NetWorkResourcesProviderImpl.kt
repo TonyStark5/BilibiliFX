@@ -8,7 +8,7 @@ import kotlinx.serialization.protobuf.ProtoBuf
 import java.nio.file.Files
 
 @OptIn(ExperimentalSerializationApi::class)
-class NetWorkApiProviderImpl: NetWorkApiProvider() {
+class NetWorkResourcesProviderImpl: NetWorkResourcesProvider() {
     override val headers: HttpHeaders = ProtoBuf.decodeFromByteArray(Files.readAllBytes(headersFilePath))
     override val api: HttpApi = ProtoBuf.decodeFromByteArray(Files.readAllBytes(apiFilePath))
 }

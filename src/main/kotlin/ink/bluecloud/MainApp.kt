@@ -4,7 +4,7 @@ import ink.bluecloud.cloudtools.cloudnotice.CloudNotice
 import ink.bluecloud.cloudtools.cloudnotice.Property.NoticeType
 import ink.bluecloud.cloudtools.stageinitializer.initCustomizeStageAndRoot
 import ink.bluecloud.css.themes
-import ink.bluecloud.ui.loginview.LoginView
+import ink.bluecloud.ui.homeview.HomeView
 import ink.bluecloud.ui.loginview.LoginViewController
 import javafx.scene.Scene
 import javafx.scene.image.Image
@@ -18,13 +18,16 @@ import tornadofx.*
 
 class MainApp: App(
     icon = Image("icon.png"),
-    primaryView = LoginView::class,
+//    primaryView = LoginView::class,
+    primaryView = HomeView::class,
 ) {
 
+/*
     init {
-//        reloadViewsOnFocus()
-//        reloadStylesheetsOnFocus()
+        reloadViewsOnFocus()
+        reloadStylesheetsOnFocus()
     }
+*/
 
     override fun start(stage: Stage) {
         super.start(stage.apply {

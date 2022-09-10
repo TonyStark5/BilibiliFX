@@ -3,7 +3,7 @@ package ink.bluecloud.ink.bluecloud.service
 import ink.bluecloud.client.HttpClient
 import ink.bluecloud.ink.bluecloud.service.provider.ServiceResources
 import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
-import ink.bluecloud.model.networkapi.NetWorkApiProvider
+import ink.bluecloud.model.networkapi.NetWorkResourcesProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 abstract class ClientService:ServiceResources {
     //网络访问资源
     override lateinit var httpClient: HttpClient
-    override lateinit var netWorkApiProvider: NetWorkApiProvider
+    override lateinit var netWorkResourcesProvider: NetWorkResourcesProvider
 
     //协程控制资源
     override lateinit var ioScope: CoroutineScope
