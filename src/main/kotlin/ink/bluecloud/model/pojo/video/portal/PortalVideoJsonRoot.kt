@@ -1,10 +1,5 @@
 package ink.bluecloud.ink.bluecloud.model.pojo.video.portal
 
-import com.alibaba.fastjson2.annotation.JSONBuilder
-import com.alibaba.fastjson2.annotation.JSONCreator
-import com.alibaba.fastjson2.annotation.JSONField
-import kotlinx.serialization.Serializable
-
 class PortalVideoJsonRoot{
     data class Root(
         val code: Int,

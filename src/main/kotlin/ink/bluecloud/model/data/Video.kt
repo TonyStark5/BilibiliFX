@@ -1,7 +1,5 @@
 package ink.bluecloud.ink.bluecloud.model.data
 
-import ink.bluecloud.model.pojo.video.info.VideoInfoJsonRoot
-
 /**
  * 视频单元类型：屏蔽直接与底层pojo直接交互
  * 视频单元只专注于 视频类型 对于其他类型以及引用将会以其ID形式存在，如：
