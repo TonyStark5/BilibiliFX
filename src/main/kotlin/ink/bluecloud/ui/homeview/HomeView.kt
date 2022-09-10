@@ -32,6 +32,8 @@ class HomeView: HomeViewNodes() {
                 }
                 paddingAll = 10
             }
+
+            paddingTop = 10
         }
 
         style {

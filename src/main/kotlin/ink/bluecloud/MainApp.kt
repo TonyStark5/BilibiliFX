@@ -5,6 +5,7 @@ import ink.bluecloud.cloudtools.cloudnotice.Property.NoticeType
 import ink.bluecloud.cloudtools.stageinitializer.initCustomizeStageAndRoot
 import ink.bluecloud.css.themes
 import ink.bluecloud.ui.homeview.HomeView
+import ink.bluecloud.ui.homeview.HomeViewController
 import ink.bluecloud.ui.loginview.LoginViewController
 import javafx.scene.Scene
 import javafx.scene.image.Image
@@ -31,9 +32,11 @@ class MainApp: App(
 
     override fun start(stage: Stage) {
         super.start(stage.apply {
+            //资源预热
             addEventHandler(WindowEvent.WINDOW_SHOWN) {
                 CoroutineScope(Dispatchers.JavaFx).launch {
                     find<LoginViewController>()
+                    find<HomeViewController>()
                 }
             }
         }.initCustomizeStageAndRoot(15))

@@ -3,6 +3,7 @@ package ink.bluecloud.ui.homeview.fragment.pushdisplaycard
 import ink.bluecloud.model.data.HomePagePushCard
 import javafx.scene.image.Image
 import javafx.scene.paint.Color
+import javafx.scene.shape.Rectangle
 import tornadofx.*
 import java.text.SimpleDateFormat
 
@@ -12,14 +13,24 @@ class PushDisplayCard:Fragment() {
 
     override val root = vbox(10) {
         children += generateCover()
-        label(data.title)
-        label("${data.author}·${simpleDateFormat.format(data.time)}")
+
+        vbox {
+            label(data.title)
+            label("${data.author}·${simpleDateFormat.format(data.time)}")
+
+            padding = insets(10, 5, 5, 5)
+        }
 
         style {
             backgroundColor += Color.WHITE
-            backgroundRadius += box(10.px)
         }
-        paddingAll = 5
+
+        heightProperty().addListener { _, _, newValue ->
+            clip = Rectangle(300.0, newValue.toDouble()).apply {
+                arcWidth = 10.0
+                arcHeight = 10.0
+            }
+        }
     }
 
     private fun generateCover() = stackpane {
