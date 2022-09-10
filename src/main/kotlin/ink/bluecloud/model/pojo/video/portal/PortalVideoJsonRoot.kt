@@ -5,29 +5,6 @@ import com.alibaba.fastjson2.annotation.JSONCreator
 import com.alibaba.fastjson2.annotation.JSONField
 import kotlinx.serialization.Serializable
 
-
-//data class PortalVideoJsonRoot(
-//    @get:JSONCreator
-//    val code: Int,
-//    val message: String??,
-//    val ttl: Int,
-//    @JSONField(name = "data")
-//    var data: PortalVideoDataRoot.Data?
-//)
-//
-//class PortalVideoDataRoot{
-//    @JSONBuilder
-//    data  class Data(
-//        val business_card: String??,
-////        val floor_info: String??,
-////        val user_feature: String??,
-////        val preload_expose_pct: Double?,
-////        val preload_floor_expose_pct: Double?,
-//    )
-//}
-
-
-
 class PortalVideoJsonRoot{
     data class Root(
         val code: Int,
@@ -50,7 +27,7 @@ class PortalVideoJsonRoot{
         val bvid: String,
         val cid: Long,
         val duration: Long,
-        val goto: String?,
+//        val goto: String?, 与Java关键字冲突
         val id: Long,
         val is_followed: Int,
         val is_stock: Int,
@@ -58,10 +35,10 @@ class PortalVideoJsonRoot{
         val owner: Owner,
         val pic: String,
         val pos: Int,
-        val pubdate: Int,
+        val pubdate: Long,
         val room_info: String?,
         val show_info: Int,
-        val stat: Stat?,
+        val stat: Stat,
         val title: String,
         val track_id: String?,
         val uri: String
