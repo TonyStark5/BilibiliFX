@@ -1,10 +1,10 @@
 package ink.bluecloud.service.provider.provider
 
 import ink.bluecloud.client.HttpClient
-import ink.bluecloud.ink.bluecloud.service.ClientService
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceResources
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
 import ink.bluecloud.model.networkapi.NetWorkResourcesProvider
+import ink.bluecloud.service.ClientService
+import ink.bluecloud.service.provider.ServiceResources
+import ink.bluecloud.service.provider.ServiceType
 import kotlinx.coroutines.CoroutineScope
 import kotlin.reflect.KClass
 

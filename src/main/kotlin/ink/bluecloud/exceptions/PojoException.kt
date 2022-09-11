@@ -1,3 +1,3 @@
-package ink.bluecloud.ink.bluecloud.exceptions
+package ink.bluecloud.exceptions
 
 class PojoException() :Exception("Unresolved POJO Exception!")

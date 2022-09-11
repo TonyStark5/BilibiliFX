@@ -1,6 +1,6 @@
 package ink.bluecloud.service.clientservice.push
 
-import ink.bluecloud.ink.bluecloud.service.ClientService
+import ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import kotlin.reflect.KClass
 

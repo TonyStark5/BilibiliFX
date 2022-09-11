@@ -1,4 +1,4 @@
-package ink.bluecloud.ink.bluecloud.model.data
+package ink.bluecloud.model.data
 
 /**
  * 视频单元类型：屏蔽直接与底层pojo直接交互

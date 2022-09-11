@@ -1,4 +1,4 @@
-package ink.bluecloud.ink.bluecloud.model.pojo.video.portal
+package ink.bluecloud.model.pojo.video.portal
 
 class PortalVideoJsonRoot{
     data class Root(

@@ -1,4 +1,4 @@
-package ink.bluecloud.ink.bluecloud.service.clientservice.account.userinfo
+package ink.bluecloud.service.clientservice.account.userinfo
 
 import ink.bluecloud.service.clientservice.account.AccountData
 import ink.bluecloud.service.clientservice.account.AccountService

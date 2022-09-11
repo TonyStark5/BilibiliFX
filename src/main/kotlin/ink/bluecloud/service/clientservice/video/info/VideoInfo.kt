@@ -1,9 +1,9 @@
-package ink.bluecloud.ink.bluecloud.service.clientservice.video.info
+package ink.bluecloud.service.clientservice.video.info
 
-import ink.bluecloud.ink.bluecloud.service.ClientService
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
+import ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.InjectByClassified
 import ink.bluecloud.service.provider.ServiceAutoRelease
+import ink.bluecloud.service.provider.ServiceType
 
 @ServiceAutoRelease
 @InjectByClassified(ServiceType.NetWork)

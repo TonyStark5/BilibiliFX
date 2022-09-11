@@ -1,4 +1,4 @@
-package ink.bluecloud.ink.bluecloud.utils
+package ink.bluecloud.utils
 
 
 /**

@@ -1,9 +1,9 @@
 package ink.bluecloud.service.clientservice.push.homepush
 
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
 import ink.bluecloud.model.data.HomePagePushCard
 import ink.bluecloud.service.clientservice.push.PushService
 import ink.bluecloud.service.provider.InjectByClassified
+import ink.bluecloud.service.provider.ServiceType
 import java.time.Duration
 import java.util.*
 

@@ -1,9 +1,9 @@
-package ink.bluecloud.ink.bluecloud.service
+package ink.bluecloud.service
 
 import ink.bluecloud.client.HttpClient
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceResources
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
 import ink.bluecloud.model.networkapi.NetWorkResourcesProvider
+import ink.bluecloud.service.provider.ServiceResources
+import ink.bluecloud.service.provider.ServiceType
 import ink.bluecloud.service.provider.dispatcher.ClientServiceDispatcher
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import kotlinx.coroutines.CoroutineScope
@@ -18,7 +18,7 @@ import tornadofx.*
  * 如果您不需要使用某个资源，请使用ExcludeInjectList注解排除您不需要的依赖
  * 当您使用该注解停止注入操作后，任何使用该变量的位置都会抛出UninitializedPropertyAccessException
 * */
-abstract class ClientService:ServiceResources {
+abstract class ClientService: ServiceResources {
     //网络访问资源
     override lateinit var httpClient: HttpClient
     override lateinit var netWorkResourcesProvider: NetWorkResourcesProvider
@@ -48,7 +48,7 @@ abstract class ClientService:ServiceResources {
 
     protected inline fun <reified P: ClientServiceProvider,reified S: ClientService> service(crossinline block: S.() -> Unit) {
         val dispatcher = find<ClientServiceDispatcher>()
-        dispatcher[P::class].provideService(S::class) {
+        dispatcher.get(P::class).provideService(S::class) {
             block()
         }
     }

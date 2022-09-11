@@ -1,9 +1,10 @@
 package ink.bluecloud.service.provider.dispatcher
 
-import ink.bluecloud.ink.bluecloud.service.ClientService
+import ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.InjectResourcesType
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import ink.bluecloud.service.provider.provider.ServiceProvider
+import kotlinx.coroutines.launch
 import mu.KotlinLogging
 import tornadofx.*
 import java.lang.invoke.MethodHandles
@@ -19,7 +20,7 @@ import kotlin.reflect.KClass
 class ClientServiceDispatcher:ServiceDispatcher() {
     val logger = KotlinLogging.logger {  }
     @Suppress("UNCHECKED_CAST")
-    operator fun <T: ClientServiceProvider> get(provider: KClass<T>): T {
+    fun <T: ClientServiceProvider> get(provider: KClass<T>): T {
         return serviceMap[provider]as? T ?: synchronized(this) {
             provider.java.instanceService().apply {
                 serviceMap[provider] = this
@@ -27,9 +28,9 @@ class ClientServiceDispatcher:ServiceDispatcher() {
         }
     }
 
-    inline fun <reified P: ClientServiceProvider,reified S: ClientService> service(crossinline block: S.() -> Unit) {
+    inline fun <reified P: ClientServiceProvider,reified S: ClientService> service(crossinline block: suspend S.() -> Unit) {
         get(P::class).provideService(S::class) {
-            block()
+            ioScope.launch { block() }
         }
     }
 

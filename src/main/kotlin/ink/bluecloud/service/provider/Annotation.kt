@@ -1,6 +1,5 @@
 package ink.bluecloud.service.provider
 
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
 import kotlin.reflect.KClass
 
 /**

@@ -1,4 +1,4 @@
-package ink.bluecloud.ink.bluecloud.service.provider
+package ink.bluecloud.service.provider
 
 import ink.bluecloud.client.HttpClient
 import ink.bluecloud.model.networkapi.NetWorkResourcesProvider
@@ -13,7 +13,7 @@ interface ServiceResources {
     val ioScope: CoroutineScope
     val uiScope: CoroutineScope
 
-    val injectTypes:Map<String,ServiceType>
+    val injectTypes:Map<String, ServiceType>
 }
 
 enum class ServiceType {

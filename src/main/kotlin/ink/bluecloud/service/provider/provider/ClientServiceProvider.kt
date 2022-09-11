@@ -1,6 +1,6 @@
 package ink.bluecloud.service.provider.provider
 
-import ink.bluecloud.ink.bluecloud.service.ClientService
+import ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.*
 import java.lang.invoke.MethodHandles
 import java.lang.invoke.MethodType

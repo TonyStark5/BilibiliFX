@@ -6,6 +6,7 @@ import javafx.beans.binding.Bindings
 import javafx.geometry.Pos
 import javafx.scene.image.Image
 import javafx.scene.layout.StackPane
+import javafx.scene.layout.VBox
 import javafx.scene.paint.Color
 import javafx.scene.paint.CycleMethod
 import javafx.scene.paint.LinearGradient
@@ -14,11 +15,10 @@ import javafx.scene.shape.Rectangle
 import tornadofx.*
 import java.text.SimpleDateFormat
 
-class PushDisplayCard:Fragment() {
-    private val data = params["data"]as HomePagePushCard
+class PushDisplayCard(private val data: HomePagePushCard):VBox(10.0) {
     private var simpleDateFormat = SimpleDateFormat("M-dd")
 
-    override val root = vbox(10) {
+    init {
         children += generateCover()
 
         vbox(5) {
@@ -44,7 +44,7 @@ class PushDisplayCard:Fragment() {
         }
     }
 
-    private fun generateCover() = stackpane {
+    private fun generateCover() = StackPane().apply {
         val cover = imageview(Image(data.cover)) {
             fitWidth = 300.0
             fitHeight = 150.0

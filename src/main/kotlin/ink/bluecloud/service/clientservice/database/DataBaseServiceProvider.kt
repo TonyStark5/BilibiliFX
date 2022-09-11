@@ -1,6 +1,6 @@
 package ink.bluecloud.service.clientservice.database
 
-import ink.bluecloud.ink.bluecloud.service.ClientService
+import ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import org.ktorm.database.Database
 import java.util.concurrent.atomic.AtomicReference

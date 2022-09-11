@@ -1,14 +1,14 @@
-package ink.bluecloud.ink.bluecloud.service.clientservice.portal
+package ink.bluecloud.service.clientservice.portal
 
 import com.alibaba.fastjson2.JSONObject
-import ink.bluecloud.ink.bluecloud.exceptions.PojoException
-import ink.bluecloud.ink.bluecloud.model.data.Video
-import ink.bluecloud.ink.bluecloud.model.data.VideoType
-import ink.bluecloud.ink.bluecloud.model.pojo.video.portal.PortalVideoJsonRoot
-import ink.bluecloud.ink.bluecloud.service.ClientService
-import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
+import ink.bluecloud.exceptions.PojoException
+import ink.bluecloud.model.data.Video
+import ink.bluecloud.model.data.VideoType
+import ink.bluecloud.model.pojo.video.portal.PortalVideoJsonRoot
+import ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.InjectByClassified
 import ink.bluecloud.service.provider.ServiceAutoRelease
+import ink.bluecloud.service.provider.ServiceType
 import ink.bluecloud.service.provider.dispatcher.ClientServiceDispatcher
 
 
