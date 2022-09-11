@@ -15,7 +15,7 @@ class HomeViewPushService: PushService() {
             "猫猫",
             Date(),
             Duration.ofMinutes(10),
-            Int.MAX_VALUE,
+            3022,
             1000,
             Thread.currentThread().contextClassLoader.getResourceAsStream("ui/homeview/demo.png").readAllBytes().inputStream()
         )

@@ -4,8 +4,11 @@ import ink.bluecloud.client.HttpClient
 import ink.bluecloud.ink.bluecloud.service.provider.ServiceResources
 import ink.bluecloud.ink.bluecloud.service.provider.ServiceType
 import ink.bluecloud.model.networkapi.NetWorkResourcesProvider
+import ink.bluecloud.service.provider.dispatcher.ClientServiceDispatcher
+import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import tornadofx.*
 
 /**
 * 服务核心类
@@ -39,6 +42,13 @@ abstract class ClientService:ServiceResources {
      * */
     protected fun IO(block: suspend CoroutineScope.() -> Unit) {
         ioScope.launch {
+            block()
+        }
+    }
+
+    protected inline fun <reified P: ClientServiceProvider,reified S: ClientService> service(crossinline block: S.() -> Unit) {
+        val dispatcher = find<ClientServiceDispatcher>()
+        dispatcher[P::class].provideService(S::class) {
             block()
         }
     }

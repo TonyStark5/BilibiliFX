@@ -21,14 +21,22 @@ class HomeView: HomeViewNodes() {
                 prefWidth = 50.0
             }
 
-            center = stackpane {
-                flowpane {
+            center = scrollpane {
+                pushPane = flowpane {
                     dispatcher[PushServiceProviderImpl::class].provideService(HomeViewPushService::class) {
-                        children += find<PushDisplayCard>(params = mapOf("data" to getCard())).root
+                       repeat(50) {
+                           children += find<PushDisplayCard>(params = mapOf("data" to getCard())).root
+                       }
                     }
+
+                    hgap = 10.0
+                    vgap = 10.0
+                    isFitToWidth = true
                 }
+
                 style {
-                    backgroundColor += c(251, 251, 251)
+                    backgroundColor += c(249, 249, 249)
+                    backgroundRadius += box(10.px)
                 }
                 paddingAll = 10
             }
@@ -39,7 +47,7 @@ class HomeView: HomeViewNodes() {
         style {
             backgroundColor += Color.WHITE
         }
-        prefWidth = 1500.0
+        prefWidth = 1350.0
         prefHeight = 1000.0
     }
 }

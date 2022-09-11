@@ -48,7 +48,7 @@ class MainApp: App(
                 this += it.globalCssFile
                 this += it.buttonCssFile
             }
-            stylesheets += "css/font.css"
+            stylesheets += "css/font/font.css"
         }
     }
 }

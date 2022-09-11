@@ -6,6 +6,7 @@ plugins {
     id("org.openjfx.javafxplugin") version "0.0.13"
     id("com.github.johnrengelman.shadow") version "7.1.0"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.7.20-Beta"
+    id("com.google.devtools.ksp") version "1.7.20-Beta-1.0.6"
 }
 
 group = "ink.bluecloud"
@@ -36,11 +37,17 @@ dependencies {
     implementation(group = "org.zeroturnaround", name = "zt-exec", version = "1.12")
     implementation(group = "eu.iamgio", name = "animated", version = "0.6.0")
 
+    //DataBase
+    implementation(group = "org.ktorm", name = "ktorm-core", version = "3.5.0")
+    implementation(group = "org.ktorm", name = "ktorm-ksp-api", version = "1.0.0-RC3")
+    implementation(group = "com.h2database", name = "h2", version = "2.1.214")
+    ksp(group = "org.ktorm", name = "ktorm-ksp-compiler", version = "1.0.0-RC3")
+
     //OKHttp
     implementation(group = "com.squareup.okhttp3", name = "okhttp", version = "5.0.0-alpha.10")
 
     //Serialization
-    implementation(group = "com.alibaba.fastjson2", name = "fastjson2-kotlin", version = "2.0.12")
+    implementation(group = "com.alibaba.fastjson2", name = "fastjson2-kotlin", version = "2.0.13")
     implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-protobuf-jvm", version = "1.4.0")
     implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json-jvm", version = "1.4.0")
 

@@ -1,5 +1,6 @@
 package ink.bluecloud.service.provider.dispatcher
 
+import ink.bluecloud.ink.bluecloud.service.ClientService
 import ink.bluecloud.service.provider.InjectResourcesType
 import ink.bluecloud.service.provider.provider.ClientServiceProvider
 import ink.bluecloud.service.provider.provider.ServiceProvider
@@ -23,6 +24,12 @@ class ClientServiceDispatcher:ServiceDispatcher() {
             provider.java.instanceService().apply {
                 serviceMap[provider] = this
             }as T
+        }
+    }
+
+    inline fun <reified P: ClientServiceProvider,reified S: ClientService> service(crossinline block: S.() -> Unit) {
+        get(P::class).provideService(S::class) {
+            block()
         }
     }
 
