@@ -31,8 +31,10 @@ class HomeViewController: Controller() {
             widthProperty().addListener { _, _, newValue ->
                 if (children.size == 0) return@addListener
 
-                val cardWidth = (children[0] as Pane).width
-                if (cardWidth == 0.0) return@addListener
+                val cardWidth = (children[0] as Pane).width.run {
+                    if (this == 0.0) return@addListener
+                    this
+                }
 
                 val cardCount = ((newValue.toDouble() - 20.0) / cardWidth).toInt().run {
                     if ((newValue.toDouble() - 20.0) - ((this - 1) * hgap) - (this * cardWidth) < 0) {
@@ -41,10 +43,6 @@ class HomeViewController: Controller() {
                         this
                     }
                 }
-
-//                println("target="+newValue.toDouble() + 20)
-//                println("now=" + (cardWidth * cardCount) + ((cardCount - 1) * 10))
-//                println("cardCount=" + cardCount)
 
                 if ((newValue.toDouble() + 20) >= ((cardWidth * cardCount) + ((cardCount - 1) * 10))) {
                     (newValue.toDouble() - (cardCount * cardWidth) + ((cardCount - 1) * 10)) / (cardCount + 1)
