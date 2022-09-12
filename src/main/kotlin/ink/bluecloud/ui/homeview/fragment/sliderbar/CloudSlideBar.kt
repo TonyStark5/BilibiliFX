@@ -1,5 +1,6 @@
 package ink.bluecloud.ui.homeview.fragment.sliderbar
 
+import ink.bluecloud.cloudtools.CLOUD_INTERPOLATOR
 import javafx.animation.Animation.Status.*
 import javafx.animation.TranslateTransition
 import javafx.beans.property.SimpleIntegerProperty

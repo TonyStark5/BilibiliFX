@@ -57,7 +57,6 @@ class PortalVideoList : ClientService() {
         return videos
     }
 
-
     /**
      * 获取首页视频推荐 POJO类
      * @param num 首页推荐的视频个数。此参数存在最大值，当超过最大值服务器会自动返回最大个数的视频数

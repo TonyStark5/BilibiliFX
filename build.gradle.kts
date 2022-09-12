@@ -30,6 +30,7 @@ dependencies {
     //GUI
     implementation(group = "no.tornado", name = "tornadofx", version = "2.0.0-SNAPSHOT")
     implementation(group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-javafx", version = "1.6.4")
+    implementation(group = "eu.iamgio", name = "animated", version = "0.6.0")
     implementation(files("libs\\CloudTools-1.0-SNAPSHOT.jar"))
     implementation(files("libs\\ElementFX-1.0-SNAPSHOT.jar"))
 
@@ -59,6 +60,10 @@ dependencies {
     implementation(group = "org.slf4j", name = "slf4j-api", version = "1.7.36")
     implementation(group = "org.slf4j", name = "slf4j-simple", version = "1.7.36")
     implementation(group = "io.github.microutils", name = "kotlin-logging", version = "2.1.23")
+
+    //Video
+    implementation(group = "uk.co.caprica", name = "vlcj-javafx", version = "1.1.0")
+    implementation(group = "uk.co.caprica", name = "vlcj", version = "4.7.3")
 
     testImplementation(group = "junit", name = "junit", version = "4.13.2")
 }

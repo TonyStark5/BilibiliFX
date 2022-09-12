@@ -15,7 +15,6 @@ class HttpClientImpl: HttpClient() {
             Request(url, headers)
         }?: Request(url)
 
-
         executeRequest(request, onFailure, onResponse)
     }
 
